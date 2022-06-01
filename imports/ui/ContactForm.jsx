@@ -7,7 +7,7 @@ export const ContactForm = () => {
   const [email, setEmail] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const SaveContact = () => {
-    ContactsCollection.insert(name, email, imageUrl);
+    ContactsCollection.insert({name, email, imageUrl});
     console.log({ name, email, imageUrl });
     setEmail((value = ""));
     setName((value = ""));
