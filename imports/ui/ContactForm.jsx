@@ -1,42 +1,49 @@
 import React from "react";
-import { useState } from "react";
 import { Meteor } from "meteor/meteor";
-import { ErrorAlert } from "./components/ErrorAlert";
+import {ErrorAlert} from "./components/ErrorAlert";
+import {SuccessAlert} from "./components/SuccessAlert";
 
 export const ContactForm = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [name, setName] = React.useState(""); // Formik
+  const [email, setEmail] = React.useState("");
+  const [imageUrl, setImageUrl] = React.useState("");
+  const [error, setError] = React.useState("");
+  const [success, setSuccess] = React.useState("");
 
-  const SaveContact = () => {
-    Meteor.call(
-      "contactsinsert",
-      { name, email, imageUrl },
-      (errorResponse) => {
-        if (errorResponse) {
-          setError(errorResponse.error);
-          alert();
-        } else {
-          setEmail((value = ""));
-          setName((value = ""));
-          setImageUrl((value = ""));
-          setSuccess((value ="Contact added with success"))
-        }
+  const showError = ({ message }) => {
+    setError(message);
+    setTimeout(() => {
+      setError("");
+    }, 5000);
+  }
+
+  const showSuccess = ({ message }) => {
+    setSuccess(message);
+    setTimeout(() => {
+      setSuccess("");
+    }, 5000);
+  }
+
+  const saveContact = () => {
+    Meteor.call('contacts.insert', { name, email, imageUrl }, (errorResponse) => {
+      if(errorResponse) {
+        showError({ message: errorResponse.error });
+      } else {
+        setName("");
+        setEmail("");
+        setImageUrl("");
+        showSuccess({ message: "Contact saved." });
       }
-    );
-  };
+    });
+  }
 
   return (
     <form className="mt-6">
-      {error && <ErrorAlert message={error}></ErrorAlert>}
+      {error && <ErrorAlert message={error} />}
+      {success && <SuccessAlert message={success} /> }
       <div className="grid grid-cols-6 gap-6">
         <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-          <label
-            htmlFor="name"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
             Name
           </label>
           <input
@@ -49,10 +56,7 @@ export const ContactForm = () => {
         </div>
 
         <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
             Email
           </label>
           <input
@@ -65,10 +69,7 @@ export const ContactForm = () => {
         </div>
 
         <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-          <label
-            htmlFor="imageUrl"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700">
             Image URL
           </label>
           <input
@@ -83,12 +84,12 @@ export const ContactForm = () => {
       <div className="px-2 py-3 text-right">
         <button
           type="button"
-          onClick={SaveContact}
+          onClick={saveContact}
           className="bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
         >
           Save Contact
         </button>
       </div>
     </form>
-  );
-};
+  )
+}
