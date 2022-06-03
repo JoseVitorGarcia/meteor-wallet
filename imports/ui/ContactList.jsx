@@ -13,15 +13,15 @@ export const ContactList = () => {
         Contact List
       </h3>
       <ul role="list" className="mt-4 border-t border-b border-gray-200 divide-y divide-gray-200">
-        {contact.map((person, personIdx) => (
-          <li key={personIdx} className="py-4 flex items-center justify-between space-x-3">
+        {contact.map((contact) => (
+          <li key={contact.email} className="py-4 flex items-center justify-between space-x-3">
             <div className="min-w-0 flex-1 flex items-center space-x-3">
               <div className="flex-shrink-0">
-                <img className="h-10 w-10 rounded-full" src={person.imageUrl} alt="" />
+                <img className="h-10 w-10 rounded-full" src={contact.imageUrl} alt="" />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-sm font-medium text-gray-900 truncate">{person.name}</p>
-                <p className="text-sm font-medium text-gray-500 truncate">{person.email}</p>
+                <p className="text-sm font-medium text-gray-900 truncate">{contact.name}</p>
+                <p className="text-sm font-medium text-gray-500 truncate">{contact.email}</p>
               </div>
             </div>
           </li>
