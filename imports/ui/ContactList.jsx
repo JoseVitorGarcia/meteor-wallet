@@ -16,7 +16,7 @@ export const ContactList = () => {
       <div>
         <div className="mt-10">
           <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
-            Loading...
+            Carregando...
           </h3>
         </div>
       </div>
@@ -40,7 +40,7 @@ export const ContactList = () => {
               onClick={(event) => removeContact(event, contact._id)}
               className="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50"
             >
-              Remove
+              Remover
             </a>
           </div>
         </div>

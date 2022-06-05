@@ -44,7 +44,7 @@ export const ContactForm = () => {
       <div className="grid grid-cols-6 gap-6">
         <div className="col-span-6 sm:col-span-6 lg:col-span-2">
           <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-            Name
+            Nome
           </label>
           <input
             type="text"
@@ -70,7 +70,7 @@ export const ContactForm = () => {
 
         <div className="col-span-6 sm:col-span-3 lg:col-span-2">
           <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700">
-            Image URL
+            URL da imagem
           </label>
           <input
             type="text"
@@ -87,7 +87,7 @@ export const ContactForm = () => {
           onClick={saveContact}
           className="bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
         >
-          Save Contact
+          Salvar Contato
         </button>
       </div>
     </form>
